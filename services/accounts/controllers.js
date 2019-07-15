@@ -1,7 +1,12 @@
 const Account = require('./model');
 
-exports.getAllAccounts = async () => {
-  const accounts = await Account.findAll();
+exports.getAllAccounts = async (config) => {
+  let accounts;
+  if (!config) {
+    accounts = await Account.findAll();
+  } else {
+    accounts = await Account.findAll(config);
+  }
 
   return accounts;
 };

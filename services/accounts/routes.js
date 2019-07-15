@@ -8,10 +8,21 @@ const middleware = require('./middleware');
 
 router.get('/accounts', async (req, res, next) => {
   try {
-    const accounts = await controller.getAllAccounts();
+    const { limit, sortby, sortdir } = req.query;
+    let accounts;
+    if (limit && sortby && sortdir) {
+      accounts = await controller.getAllAccounts({
+        limit,
+        sortby,
+        sortdir
+      });
+    } else {
+      accounts = await controller.getAllAccounts();
+    }
     res.json(accounts);
   } catch (error) {
-    res.status(500).json({ message: 'There was an error' });
+    next(new Error(error));
+    //res.status(500).json({ message: 'There was an error' });
   }
 });
 

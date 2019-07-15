@@ -2,8 +2,14 @@ const db = require('../../data/dbConfig');
 
 const TABLE_NAME = 'accounts';
 
-exports.findAll = () => {
-  return db(TABLE_NAME);
+exports.findAll = config => {
+  if (config && Number(config.limit) && config.sortby && config.sortdir) {
+    return db(TABLE_NAME)
+      .limit(config.limit)
+      .orderBy(config.sortby, config.sortdir);
+  } else {
+    return db(TABLE_NAME);
+  }
 };
 
 exports.findAccountWithId = id => {
@@ -23,5 +29,7 @@ exports.update = (id, { name, budget }) => {
 };
 
 exports.delete = id => {
-  return db(TABLE_NAME).where({ id }).del();
-}
+  return db(TABLE_NAME)
+    .where({ id })
+    .del();
+};
