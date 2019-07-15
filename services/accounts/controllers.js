@@ -1,6 +1,6 @@
 const Account = require('./model');
 
-exports.getAllAccounts = async (config) => {
+exports.getAllAccounts = async config => {
   let accounts;
   if (!config) {
     accounts = await Account.findAll();
@@ -26,7 +26,7 @@ exports.createAccount = async ({ name, budget }) => {
   return createdAccount;
 };
 
-exports.updateAccountWithId = async (id, { name, budget}) => {
+exports.updateAccountWithId = async (id, { name, budget }) => {
   const updatedId = await Account.update(id, { name, budget });
   const updatedAccount = await Account.findAccountWithId(updatedId);
 

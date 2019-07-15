@@ -21,8 +21,7 @@ router.get('/accounts', async (req, res, next) => {
     }
     res.json(accounts);
   } catch (error) {
-    next(new Error(error));
-    //res.status(500).json({ message: 'There was an error' });
+    res.status(500).json({ message: 'There was an error' });
   }
 });
 
