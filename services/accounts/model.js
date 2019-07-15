@@ -21,3 +21,7 @@ exports.update = (id, { name, budget }) => {
     .where({ id })
     .update({ name, budget });
 };
+
+exports.delete = id => {
+  return db(TABLE_NAME).where({ id }).del();
+}

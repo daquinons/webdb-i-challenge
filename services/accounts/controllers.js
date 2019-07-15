@@ -27,3 +27,9 @@ exports.updateAccountWithId = async (id, { name, budget}) => {
 
   return updatedAccount;
 };
+
+exports.deleteAccountWithId = async id => {
+  const numberOfDeletedAccounts = await Account.delete(id);
+
+  return numberOfDeletedAccounts;
+};
