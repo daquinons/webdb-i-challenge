@@ -20,3 +20,10 @@ exports.createAccount = async ({ name, budget }) => {
 
   return createdAccount;
 };
+
+exports.updateAccountWithId = async (id, { name, budget}) => {
+  const updatedId = await Account.update(id, { name, budget });
+  const updatedAccount = await Account.findAccountWithId(updatedId);
+
+  return updatedAccount;
+};

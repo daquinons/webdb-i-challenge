@@ -36,8 +36,15 @@ router.get('/accounts/:id', async (req, res, next) => {
   }
 });
 
-router.put('/accounts/:id', (req, res, next) => {
-  res.json({ message: 'Update account ' + req.params.id });
+router.put('/accounts/:id', async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const { name, budget } = req.body;
+    const updatedAccount = await accountsController.updateAccountWithId(id, { name, budget });
+    res.json(updatedAccount);
+  } catch (error) {
+    res.status(500).json({ message: 'There was an error' });
+  }
 });
 
 router.delete('/accounts/:id', (req, res, next) => {
