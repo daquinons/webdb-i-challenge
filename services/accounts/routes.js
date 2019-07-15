@@ -13,8 +13,17 @@ router.get('/accounts', async (req, res, next) => {
   }
 });
 
-router.post('/accounts', (req, res, next) => {
-  res.json({ message: 'Create account' });
+router.post('/accounts', async (req, res, next) => {
+  try {
+    const { name, budget } = req.body;
+    const createdAccount = await accountsController.createAccount({
+      name,
+      budget
+    });
+    res.status(201).json(createdAccount);
+  } catch (error) {
+    next(new Error(error));
+  }
 });
 
 router.get('/accounts/:id', async (req, res, next) => {

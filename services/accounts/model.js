@@ -7,5 +7,11 @@ exports.findAll = () => {
 };
 
 exports.findAccountWithId = id => {
-  return db(TABLE_NAME).where({ id: id }).first();
+  return db(TABLE_NAME)
+    .where({ id: id })
+    .first();
+};
+
+exports.insert = ({ name, budget }) => {
+  return db(TABLE_NAME).insert({ name, budget });
 };
