@@ -22,7 +22,7 @@ router.post('/accounts', async (req, res, next) => {
     });
     res.status(201).json(createdAccount);
   } catch (error) {
-    next(new Error(error));
+    res.status(500).json({ message: 'There was an error' });
   }
 });
 
